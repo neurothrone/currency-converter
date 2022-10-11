@@ -17,7 +17,7 @@ struct ContentView: View {
     NavigationStack {
       TabView {
         content
-        CurrenciesView()
+        CurrenciesScreen()
       }
       .navigationTitle("WatchFX")
       .navigationBarTitleDisplayMode(.inline)
@@ -48,10 +48,14 @@ struct ContentView: View {
           )
         
         HStack {
-          CurrencyPickerView(selection: $selectedCurrency)
+          NavigationLink {
+            CurrencySelectionScreen(selection: $selectedCurrency)
+          } label: {
+            Text(selectedCurrency.rawValue)
+          }
           
           NavigationLink {
-            ResultsView(amount: amount, baseCurrency: selectedCurrency)
+            ResultsScreen(amount: amount, baseCurrency: selectedCurrency)
           } label: {
             Text("Go")
               .frame(width: geo.size.width * 0.4)

@@ -10,7 +10,7 @@ import Foundation
 final class WebService {
   static var apiKey: String {
     guard let key = ProcessInfo.processInfo.environment["API_KEY"] else {
-      fatalError("❌ -> API Key not set in scheme")
+      fatalError("❌ -> Environment variable [API_Key] was not found. Did you forget to add it in scheme?")
     }
     
     return key

@@ -1,5 +1,5 @@
 //
-//  ResultsView.swift
+//  ResultsScreen.swift
 //  CurrencyConverter Watch App
 //
 //  Created by Zaid Neurothrone on 2022-10-11.
@@ -13,7 +13,7 @@ struct CurrencyResult: Codable {
   let rates: [String: Double]
 }
 
-struct ResultsView: View {
+struct ResultsScreen: View {
   enum FetchState {
     case fetching, success, failed
   }
@@ -44,8 +44,8 @@ struct ResultsView: View {
   }
 }
 
-extension ResultsView {
-  func fetchData() {
+extension ResultsScreen {
+  private func fetchData() {
     guard let url = URL(string: "https://openexchangerates.org/api/latest.json?app_id=\(WebService.apiKey)&base=\(baseCurrency.rawValue)") else {
       fetchState = .failed
       return
@@ -59,7 +59,7 @@ extension ResultsView {
       .sink(receiveValue: parse)
   }
   
-  func parse(result: CurrencyResult) {
+  private func parse(result: CurrencyResult) {
     guard !result.rates.isEmpty else {
       fetchState = .failed
       return
@@ -83,13 +83,13 @@ extension ResultsView {
     fetchedCurrencies.sort { $0.symbol < $1.symbol}
   }
   
-  func rate(for result: (symbol: String, rate: Double)) -> String {
+  private func rate(for result: (symbol: String, rate: Double)) -> String {
     result.rate.formatted(.currency(code: result.symbol))
   }
 }
 
-struct ResultsView_Previews: PreviewProvider {
+struct ResultsScreen_Previews: PreviewProvider {
   static var previews: some View {
-    ResultsView(amount: 500, baseCurrency: .usd)
+    ResultsScreen(amount: 500, baseCurrency: .usd)
   }
 }

@@ -1,5 +1,5 @@
 //
-//  CurrenciesView.swift
+//  CurrenciesScreen.swift
 //  CurrencyConverter Watch App
 //
 //  Created by Zaid Neurothrone on 2022-10-11.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CurrenciesView: View {
+struct CurrenciesScreen: View {
   @State private var selectedCurrencies: [CurrencyType] = CurrencyType.loadCurrencies()
   
   let selectedColor: Color = .init(red: 0, green: 0.55, blue: 0.25)
@@ -32,7 +32,7 @@ struct CurrenciesView: View {
   }
 }
 
-extension CurrenciesView {
+extension CurrenciesScreen {
   private func toggle(_ currency: CurrencyType) {
     if let index = selectedCurrencies.firstIndex(of: currency) {
       selectedCurrencies.remove(at: index)
@@ -44,8 +44,8 @@ extension CurrenciesView {
   }
 }
 
-struct CurrenciesView_Previews: PreviewProvider {
+struct CurrenciesScreen_Previews: PreviewProvider {
   static var previews: some View {
-    CurrenciesView()
+    CurrenciesScreen()
   }
 }
